@@ -1,4 +1,6 @@
 from flask import Flask, request
+import sys
+sys.path.insert(1, 'api/')
 import bot
 
 
