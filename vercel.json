@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "src": "/.*",
+      "dest": "api/flask_app.py"
+    }
+  ],
+  "functions": {
+    "api/flask_app.py": {
+      "includeFiles": "*"
+    }
+  }
+}
