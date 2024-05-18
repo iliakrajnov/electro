@@ -22,7 +22,7 @@ def getTrains(from_st, to_st):
 
 
 def parseMessage(text):
-    splitted = text.split('>')
+    splitted = text.split('--')
     return splitted[0].strip(), splitted[1].strip()
 
 def send(message,user_id, keyboard=''):
