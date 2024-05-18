@@ -23,7 +23,7 @@ def index():
         try:
             from_st, to_st = bot.parseMessage(text)
             trains = bot.getTrains(from_st, to_st)
-            return bot.send('\n'.join(trains), from_id, dumps({"buttons":[[{"action":{"type":"callback","label":"🔁 Повторить","payload":'"{\"text\": \"' + text + '\"}"'},"color":"secondary"}]],"inline":True}))
+            return bot.send('\n'.join(trains), from_id, dumps({"buttons":[[{"action":{"type":"callback","label":"🔁 Повторить","payload":'"{"text": "' + text + '"}"'},"color":"secondary"}]],"inline":True}))
         except Exception as e:
             bot.send("К сожалению, я тебя не понимаю. Напиши путь в формате отправление > прибытие", from_id)
             return traceback.format_exc()
