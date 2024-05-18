@@ -16,7 +16,7 @@ def index():
     if data['type'] == 'message_new' or data['type'] == 'message_event':
         if data['type'] == 'message_event':
             from_id = data['object']['user_id']
-            text = loads(data['object']['payload'])['text']
+            text = data['object']['payload']['text']
         else:
             from_id = data['object']['message']['from_id']
             text = data['object']['message']['text']
@@ -24,7 +24,7 @@ def index():
         try:
             from_st, to_st = bot.parseMessage(text)
             trains = bot.getTrains(from_st, to_st)
-            bot.send('\n'.join(trains), from_id, dumps({"buttons":[[{"action":{"type":"callback","label":"🔁 Повторить","payload":"{\"text\": \"' + text + '\"}"},"color":"secondary"}]],"inline":True}))
+            bot.send('\n'.join(trains), from_id, dumps({"buttons":[[{"action":{"type":"callback","label":"🔁 Повторить","payload":'"{\"text\": \"' + text + '\"}"}',"color":"secondary"}]],"inline":True}))
         except Exception as e:
             bot.send("К сожалению, я тебя не понимаю. Напиши путь в формате отправление > прибытие", from_id)
             return str(e)
