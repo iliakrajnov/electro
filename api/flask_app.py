@@ -17,6 +17,8 @@ def index():
         try:
             from_st, to_st = bot.parseMessage(data['object']['message']['text'])
             trains = bot.getTrains(from_st, to_st)
+            from json import dumps
+            return dumps(trains)
             bot.send('\n'.join(trains), from_id)
         except Exception as e:
             bot.send("К сожалению, я тебя не понимаю. Напиши путь в формате отправление -> прибытие", from_id)
