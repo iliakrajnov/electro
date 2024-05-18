@@ -25,4 +25,4 @@ def parseMessage(text):
     return splitted[0].strip(), splitted[1].strip()
 
 def send(message,user_id):
-  return requests.get('https://api.vk.com/method/messages.send', params={"message":message,"user_id":user_id,"random_id":0, 'v':"5.131","access_token":TOKEN}).json()
+  return requests.get('https://api.vk.com/method/messages.send', params={"message":message,"user_id":user_id,"random_id":0, 'v':"5.131","access_token":TOKEN, "keyboard": {"buttons":[[{"action":{"type":"text","label":"❤️ Добавить в избранные","payload":""},"color":"secondary"}]],"inline":true}}).json()
