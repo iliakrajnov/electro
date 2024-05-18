@@ -1,4 +1,5 @@
 from flask import Flask, request
+from json import loads
 import sys
 sys.path.insert(1, 'api/')
 import bot
@@ -12,14 +13,21 @@ def index():
 
     if data['type'] == 'confirmation':
         return '5d3d07cf'
-    if data['type'] == 'message_new':
-        from_id = data['object']['message']['from_id']
+    if data['type'] == 'message_new' or data['type'] == 'message_event':
+        if data['type'] == 'message_event':
+            from_id = data['object']['user_id']
+            text = loads(data['object']['payload'])['text']
+        else:
+            from_id = data['object']['message']['from_id']
+            text = data['object']['message']['text']
+        
         try:
-            from_st, to_st = bot.parseMessage(data['object']['message']['text'])
+            from_st, to_st = bot.parseMessage(text)
             trains = bot.getTrains(from_st, to_st)
             bot.send('\n'.join(trains), from_id, '{"buttons":[[{"action":{"type":"text","label":"🔁 Повторить","payload":"{\"text\": \"'+ data['object']['message']['text'] +'\"}"},"color":"secondary"}]],"inline":true}')
         except Exception as e:
             bot.send("К сожалению, я тебя не понимаю. Напиши путь в формате отправление > прибытие", from_id)
             return str(e)
+        
 
     return 'ok'
