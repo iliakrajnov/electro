@@ -19,7 +19,7 @@ def index():
             trains = bot.getTrains(from_st, to_st)
             bot.send('\n'.join(trains), from_id)
         except Exception as e:
+            bot.send("К сожалению, я тебя не понимаю. Напиши путь в формате отправление -> прибытие", from_id)
             return str(e)
-            bot.send("К сожалению, я тебя не понимаю 2", from_id)
 
     return 'ok'
