@@ -20,7 +20,7 @@ def index():
         else:
             from_id = data['object']['message']['from_id']
             text = data['object']['message']['text']
-        
+        return text
         try:
             from_st, to_st = bot.parseMessage(text)
             trains = bot.getTrains(from_st, to_st)
