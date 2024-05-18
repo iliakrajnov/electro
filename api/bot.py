@@ -18,6 +18,7 @@ def getTrains(from_st, to_st):
       res.append(f"[{train['trainNumber']}] {train['departureTime'].split('T')[1][:-3]}-{train['arrivalTime'].split('T')[1][:-3]} {train['startStationName']} -> {train['finishStationName']}")
       if len(res) == 5:
         return res
+  return res
 
 
 def parseMessage(text):
